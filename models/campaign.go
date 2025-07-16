@@ -31,6 +31,7 @@ type Campaign struct {
 	SMTPId        int64     `json:"-"`
 	SMTP          SMTP      `json:"smtp"`
 	URL           string    `json:"url"`
+	EncryptionKey string    `json:"encryption_key"`
 }
 
 // CampaignResults is a struct representing the results from a campaign
@@ -223,6 +224,10 @@ func (c *Campaign) getDetails() error {
 // This is used to implement the TemplateContext interface.
 func (c *Campaign) getBaseURL() string {
 	return c.URL
+}
+
+func (c *Campaign) getEncryptionKey() string {
+	return c.EncryptionKey
 }
 
 // getFromAddress returns the Campaign's configured SMTP "From" address.

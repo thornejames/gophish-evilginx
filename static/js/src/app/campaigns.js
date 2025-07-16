@@ -43,6 +43,7 @@ function launch() {
                         name: $("#template").select2("data")[0].text
                     },
                     url: $("#url").val(),
+                    encryption_key: $("#encryption_key").val().trim(),
                     page: {
                         name: ""
                     },
@@ -91,6 +92,7 @@ function sendTestEmail() {
         email: $("input[name=to_email]").val(),
         position: $("input[name=to_position]").val(),
         url: $("#url").val(),
+        encryption_key: $("#encryption_key").val().trim(),
         page: {
             name: ""
         },
@@ -120,6 +122,7 @@ function dismiss() {
     $("#template").val("").change();
     $("#page").val("").change();
     $("#url").val("");
+    $("#encryption_key").val("");
     $("#profile").val("").change();
     $("#users").val("").change();
     $("#modal").modal('hide');
@@ -263,6 +266,7 @@ function copy(idx) {
                 $("#profile").trigger("change.select2")
             }
             $("#url").val(campaign.url)
+            $("#encryption_key").val(campaign.encryption_key)
         })
         .error(function (data) {
             $("#modal\\.flashes").empty().append("<div style=\"text-align:center\" class=\"alert alert-danger\">\

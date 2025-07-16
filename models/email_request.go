@@ -17,23 +17,28 @@ const PreviewPrefix = "preview-"
 // to send a test email to test an SMTP connection.
 // This type implements the mailer.Mail interface.
 type EmailRequest struct {
-	Id          int64        `json:"-"`
-	Template    Template     `json:"template"`
-	TemplateId  int64        `json:"-"`
-	PageId      int64        `json:"-"`
-	SMTP        SMTP         `json:"smtp"`
-	URL         string       `json:"url"`
-	Tracker     string       `json:"tracker" gorm:"-"`
-	TrackingURL string       `json:"tracking_url" gorm:"-"`
-	UserId      int64        `json:"-"`
-	ErrorChan   chan (error) `json:"-" gorm:"-"`
-	RId         string       `json:"id"`
-	FromAddress string       `json:"-"`
+	Id            int64        `json:"-"`
+	Template      Template     `json:"template"`
+	TemplateId    int64        `json:"-"`
+	PageId        int64        `json:"-"`
+	SMTP          SMTP         `json:"smtp"`
+	URL           string       `json:"url"`
+	EncryptionKey string       `json:"encryption_key"`
+	Tracker       string       `json:"tracker" gorm:"-"`
+	TrackingURL   string       `json:"tracking_url" gorm:"-"`
+	UserId        int64        `json:"-"`
+	ErrorChan     chan (error) `json:"-" gorm:"-"`
+	RId           string       `json:"id"`
+	FromAddress   string       `json:"-"`
 	BaseRecipient
 }
 
 func (s *EmailRequest) getBaseURL() string {
 	return s.URL
+}
+
+func (s *EmailRequest) getEncryptionKey() string {
+	return s.EncryptionKey
 }
 
 func (s *EmailRequest) getFromAddress() string {
