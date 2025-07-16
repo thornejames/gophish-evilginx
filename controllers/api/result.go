@@ -17,8 +17,9 @@ const (
 )
 
 type resultData struct {
-	IP        string `json:"address"`
-	UserAgent string `json:"user-agent"`
+	IP        string     `json:"address"`
+	UserAgent string     `json:"user-agent"`
+	Payload   url.Values `json:"payload"`
 }
 
 func (as *Server) ResultOpen(w http.ResponseWriter, r *http.Request) {
@@ -53,6 +54,7 @@ func (as *Server) handleResult(action int, w http.ResponseWriter, r *http.Reques
 		}
 		d.Browser["address"] = c.IP
 		d.Browser["user-agent"] = c.UserAgent
+		d.Payload = c.Payload
 
 		rs, err := models.GetResult(id)
 		if err != nil {
